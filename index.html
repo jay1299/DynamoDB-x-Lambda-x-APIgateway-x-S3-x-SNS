@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>API gateway x Lamba x SNS x DynamoDB</title>
+    <style>
+    body {
+        background-color: #14bcda;
+        }
+    label, button {  /* This is for the textbox labels and the Submit button*/
+        color: #8000ff;
+        font-family: Lucida, monospace;
+        font-size: 21px;
+        margin-left: 30px;
+        }
+     input {     /* This is for the input provided into the text box*/
+        color: #762e2e; 
+        font-family: Lucida, monospace;
+        font-size: 21px;
+        margin-left: 30px;
+        }
+    .vertical-center {  /* This is used to align the Submit button in the centre of the page below the textboxes*/
+    margin: 0;
+    position: absolute;
+    top: 10%;
+    -ms-transform: translateY(50%);
+    transform: translateX(450%);
+}   
+    </style>
+    <script>
+        // define the Calling function that takes the Name, Age and Location as parameters
+        var Calling = (Name, Age, Location)=>{
+            // instantiate a headers object for adding content-type since fetch() method is being used
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            // stringify method is used to convert the json data into human readable format
+            var message = JSON.stringify({"Name":Name,"Age":Age,"Location":Location});
+            // create a JSON object with parameters for API call and store in a variable
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: message,
+                redirect: 'follow' //When redirect needs to be followed
+            };
+            // Making an API fetch() call with parameters and use promises to get response
+            fetch("https://z4nr89jqck.execute-api.us-east-1.amazonaws.com/Prod", requestOptions) //You need to add your own API Deploy link here
+            .then(response => response.text())
+            .then(result => alert(JSON.parse(result).body))
+            .catch(error => console.log('error', error));
+        }
+    </script>
+    
+</head>
+<body>
+    <form>
+        <label>Name :</label>
+        <input type="text" id="Name">
+        <label>Age :</label>
+        <input type="text" id="Age">
+        <label>Location :</label>
+        <input type="text" id="Location">
+        <!-- The below "Submit" button will call the function "Calling" and call the REST API -->
+            <div class="vertical-center"> <!-- This class is called for aligning the Submut button in center -->
+                <button type="button" onclick="Calling(document.getElementById('Name').value,document.getElementById('Age').value,document.getElementById('Location').value)">Submit</button>
+            </div>    
+    </form>
+</body>
+</html>
