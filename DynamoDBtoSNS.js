@@ -6,6 +6,6 @@ exports.handler = async (event) => {           //Since SNS calls are async w.r.t
         "Message": JSON.stringify(event.Records[0].dynamodb.NewImage),
         //"Message": JSON.stringify(event.Records[0].dynamodb.OldImage) --> You can use this when new and old
                                                                         //  image is configured in DynamoDB streams
-        "TopicArn": "Your SNS topic ARN here"
+        "TopicArn": "Your SNS topic ARN here" //This can be found in SNS 
     }).promise();
 };
