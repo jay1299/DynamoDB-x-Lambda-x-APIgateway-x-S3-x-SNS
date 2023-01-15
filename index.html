@@ -41,7 +41,7 @@
                 redirect: 'follow' //When redirect needs to be followed
             };
             // Making an API fetch() call with parameters and use promises to get response
-            fetch("https://z4nr89jqck.execute-api.us-east-1.amazonaws.com/Prod", requestOptions) //You need to add your own API Deploy link here
+            fetch("Your Invoke URL here", requestOptions) //You need to add your own API Deploy link here
             .then(response => response.text())
             .then(result => alert(JSON.parse(result).body))
             .catch(error => console.log('error', error));
